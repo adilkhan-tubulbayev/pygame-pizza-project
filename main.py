@@ -79,11 +79,11 @@ testo_rect = testo_scaled.get_rect(topleft=(500, 500))
 oven_scaled = pygame.transform.scale(pygame.image.load('assets/easy_pizza_ingredients/oven.png'), (500, 400))
 oven_rect = oven_scaled.get_rect(topleft=(1350, 500))
 
-# Список всех ингредиентов
+# Список всех ингредиентов на русском
 ingredient_list = [
-    'basil', 'cheddar', 'egg', 'gorgonzola', 'mushroom', 'pepperoni', 'tomato',
-    'cheese', 'bacon', 'onion', 'ham', 'sausage', 'olives', 'chicken', 'lettuce',
-    'shrimp', 'mussels', 'squid', 'jalapeno'
+    'базилик', 'чеддер', 'яйцо', 'горгонзола', 'грибы', 'пепперони', 'томат',
+    'сыр', 'бекон', 'лук', 'ветчина', 'колбаса', 'оливки', 'курица', 'салат',
+    'креветки', 'мидии', 'кальмар', 'халапеньо'
 ]
 
 # Списки изображений и прямоугольников для всех ингредиентов
@@ -104,9 +104,7 @@ all_ingredients_rect_list = [
 # Обновление списка имен ингредиентов
 ingredient_names = ingredient_list
 
-# **Настраиваемые параметры позиционирования ингредиентов**
-# ------------------------------------------------------------------------------
-# Изменяйте эти значения, чтобы настроить расположение ингредиентов на экране
+# Настраиваемые параметры позиционирования ингредиентов
 column1_x = 100  # X-координата для левой колонки
 column2_x = 300  # X-координата для средней колонки
 column3_x = 500  # X-координата для правой колонки
@@ -120,34 +118,34 @@ initial_positions = (
     [(column3_x, start_y + i * y_step) for i in range(6)]    # Третья колонка
 )
 
-# Рецепты пицц
+# Рецепты пицц на русском
 easy_pizzas = {
-    "Маргарита": ["tomato", "cheese", "basil"],
-    "4 сыра": ["cheddar", "gorgonzola", "cheese"],
-    "Пепперони": ["tomato", "cheese", "pepperoni"],
-    "Мимоза": ["tomato", "cheese", "egg", "mushroom"]
+    "Маргарита": ["томат", "сыр", "базилик"],
+    "4 сыра": ["чеддер", "горгонзола", "сыр"],
+    "Пепперони": ["томат", "сыр", "пепперони"],
+    "Мимоза": ["томат", "сыр", "яйцо", "грибы"]
 }
 
 medium_pizzas = {
-    "Карбонара": ["cheese", "egg", "bacon"],
-    "Неаполитанская": ["tomato", "cheese", "basil"],
-    "Фермерская": ["tomato", "cheese", "mushroom", "onion", "ham"],
-    "Мясная": ["tomato", "cheese", "pepperoni", "bacon", "sausage"],
-    "Грибы и Ветчина": ["mushroom", "cheese", "ham"]
+    "Карбонара": ["сыр", "яйцо", "бекон"],
+    "Неаполитанская": ["томат", "сыр", "базилик"],
+    "Фермерская": ["томат", "сыр", "грибы", "лук", "ветчина"],
+    "Мясная": ["томат", "сыр", "пепперони", "бекон", "колбаса"],
+    "Грибы и Ветчина": ["грибы", "сыр", "ветчина"]
 }
 
 hard_pizzas = {
-    "4 сезона": ["tomato", "cheese", "mushroom", "ham", "olives"],
-    "Цезарь": ["cheese", "chicken", "lettuce", "egg"],
-    "Пицца с морепродуктами": ["tomato", "cheese", "shrimp", "mussels", "squid"],
-    "Острая Барбекю": ["tomato", "cheese", "pepperoni", "jalapeno", "onion"],
-    "Веган": ["tomato", "mushroom", "onion", "olives"]
+    "4 сезона": ["томат", "сыр", "грибы", "ветчина", "оливки"],
+    "Цезарь": ["сыр", "курица", "салат", "яйцо"],
+    "Пицца с морепродуктами": ["томат", "сыр", "креветки", "мидии", "кальмар"],
+    "Острая Барбекю": ["томат", "сыр", "пепперони", "халапеньо", "лук"],
+    "Веган": ["томат", "грибы", "лук", "оливки"]
 }
 
 # Игровые переменные
 current_level = 1
 level_times = [30000, 60000, 100000]  # Время в миллисекундах: 30с, 60с, 100с
-required_coins = [1, 10, 21]  # Необходимые монеты для перехода
+required_coins = [1, 3, 5]  # Необходимые монеты для перехода
 start_time = pygame.time.get_ticks()
 coins = 0
 placed_ingredients = set()
@@ -236,13 +234,13 @@ def finish_baking():
 # Вспомогательные функции для отрисовки
 def draw_text(surface, text, text_size, text_color, coordinates, antialias=True):
     color = pygame.Color(text_color)
-    font = pygame.font.Font('fonts/PressStart2P-Regular.ttf', text_size)
+    font = pygame.font.Font('fonts/SofiaSans-Bold.ttf', text_size)
     text_render = font.render(str(text), antialias, color, pygame.Color('#FFCDBC'))
     surface.blit(text_render, coordinates)
 
 def draw_button_text(surface, text, text_size, text_hex_color, btn_x, btn_y, btn_width, btn_height, antialias=True):
     color = pygame.Color(text_hex_color)
-    font = pygame.font.Font('fonts/PressStart2P-Regular.ttf', text_size)
+    font = pygame.font.Font('fonts/SofiaSans-Bold.ttf', text_size)
     text_render = font.render(str(text), antialias, color)
     text_x = (btn_x + btn_width // 2) - (text_render.get_width() // 2)
     text_y = (btn_y + btn_height // 2) - (text_render.get_height() // 2)
@@ -301,7 +299,7 @@ def game_scene():
     # Процесс выпечки
     if pizza_in_oven:
         elapsed = (pygame.time.get_ticks() - baking_start_time) / 1000
-        draw_text(window, f"Время в духовке: {elapsed:.1f} сек", 30, '#000000', (850, 450))
+        draw_text(window, f"Время в духовке: {elapsed:.1f} сек", 30, '#000000', (1435, 450))
         button_values.append(draw_button(window, 'Вытащить пиццу', 25, 850, 600, 400, 100))
     else:
         # Отображение теста и всех ингредиентов
